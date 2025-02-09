@@ -82,11 +82,11 @@ const Handler = {
   },
 
   addResizeCb(cb) {
-    this.resizeCb.push(cb);
+    this.resizeCbs.push(cb);
   },
 
   clearResizeCb() {
-    this.resizeCb = [];
+    this.resizeCbs = [];
   },
 
   async uploadImage(description) {
