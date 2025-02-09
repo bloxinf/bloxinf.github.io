@@ -6,10 +6,10 @@ const Canvas = {
   ratio: 1,
 
   init() {
-    document.getElementsByTagName("canvas").forEach((canvas) => {
+    for (canvas of document.getElementsByTagName("canvas")) {
       this.canvases.push(canvas);
       this.ctxs.push(canvas.getContext("2d"));
-    });
+    }
     this.resize();
   },
 
