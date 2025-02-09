@@ -1,6 +1,6 @@
-import Canvas from "./canvas";
-import { Canvases } from "./enum";
-import Handler from "./handler";
+import Canvas from "./canvas.js";
+import { Canvases } from "./enum.js";
+import Handler from "./handler.js";
 
 const Panel = {
   menu: [],

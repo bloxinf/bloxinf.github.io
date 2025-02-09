@@ -1,5 +1,5 @@
-import Canvas from "./canvas";
-import { Directions } from "./enum";
+import Canvas from "./canvas.js";
+import { Directions } from "./enum.js";
 
 const Handler = {
   moveCb: null,

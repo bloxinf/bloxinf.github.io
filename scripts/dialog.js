@@ -1,4 +1,4 @@
-import Handler from "./handler";
+import Handler from "./handler.js";
 
 const Dialog = {
   dialog: null,

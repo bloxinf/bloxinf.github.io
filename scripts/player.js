@@ -1,7 +1,7 @@
-import Blox from "./blox";
-import { Lands, Poses, Directions, Terminations, Statuses } from "./enum";
-import Grid from "./grid";
-import Handler from "./handler";
+import Blox from "./blox.js";
+import { Lands, Poses, Directions, Terminations, Statuses } from "./enum.js";
+import Grid from "./grid.js";
+import Handler from "./handler.js";
 
 const Player = {
   terminateCb: null,
