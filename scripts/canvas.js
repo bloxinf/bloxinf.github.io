@@ -6,7 +6,8 @@ const Canvas = {
   ratio: 1,
 
   init() {
-    for (canvas of document.getElementsByTagName("canvas")) {
+    const canvases = document.getElementsByTagName("canvas");
+    for (canvas of canvases) {
       this.canvases.push(canvas);
       this.ctxs.push(canvas.getContext("2d"));
     }
