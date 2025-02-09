@@ -1,22 +1,31 @@
-import { Lands, Poses, Directions, Terminations } from "./enum";
+import Blox from "./blox";
+import { Lands, Poses, Directions, Terminations, Statuses } from "./enum";
+import Grid from "./grid";
 import Handler from "./handler";
 
 const Player = {
-  stage: null,
+  terminateCb: null,
 
-  play(stage) {
-    this.stage = JSON.parse(stage);
-    this.menu();
-    this.blox();
-    this.grid();
+  start(stage, terminateCb) {
+    if (
+      Grid.load(stage.grid) === Statuses.Failure ||
+      Blox.load(stage.blox) === Statuses.Failure
+    ) {
+      Grid.unload();
+      Blox.unload();
+      return Statuses.Failure;
+    }
+    this.terminateCb = terminateCb;
     Handler.setMoveCb((direction) => this.move(direction));
+    return Statuses.Success;
   },
 
-  menu() {},
-
-  blox() {},
-
-  grid() {},
+  terminate(termination) {
+    Handler.clearMoveCb();
+    Grid.unload();
+    Blox.unload();
+    this.terminateCb(termination);
+  },
 
   move(direction) {
     const { x, y } = this.blox.start;

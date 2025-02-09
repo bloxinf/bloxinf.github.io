@@ -25,13 +25,14 @@
     <canvas></canvas>
     <canvas></canvas>
     <canvas></canvas>
-    <script>
+    <script type="module">
       import Canvas from "./scripts/canvas";
       import Game from "./scripts/game";
       import Handler from "./scripts/handler";
 
       Handler.init();
       Canvas.init();
+      Game.init();
       Game.run();
     </script>
   </body>

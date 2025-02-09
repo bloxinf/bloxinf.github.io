@@ -3,6 +3,7 @@ const Canvas = {
   ctxs: [],
   width: 0,
   height: 0,
+  ratio: 1,
 
   init() {
     document.getElementsByTagName("canvas").forEach((canvas) => {
@@ -16,6 +17,7 @@ const Canvas = {
     const ratio = window.devicePixelRatio;
     this.width = window.innerWidth * ratio;
     this.height = window.innerHeight * ratio;
+    this.ratio = ratio;
     this.canvases.forEach((canvas) => {
       canvas.width = this.width;
       canvas.height = this.height;
@@ -28,6 +30,10 @@ const Canvas = {
 
   getSize() {
     return { width: this.width, height: this.height };
+  },
+
+  getRatio() {
+    return this.ratio;
   },
 };
 

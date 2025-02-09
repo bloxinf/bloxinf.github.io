@@ -38,13 +38,16 @@ const Handler = {
       prevY = e.y;
     };
     document.onpointerup = (e) => {
-      let x = e.x;
-      let y = e.y;
-      let dx = x - prevX;
-      let dy = y - prevY;
+      const x = e.x;
+      const y = e.y;
+      const dx = x - prevX;
+      const dy = y - prevY;
       if (Math.abs(dx) < 10 && Math.abs(dy) < 10) {
-        this.clickCbs.forEach(({ trigger, handle }) => {
-          if (trigger(x, y)) handle();
+        const ratio = Canvas.getRatio();
+        this.clickCbs.forEach((cbs) => {
+          cbs.forEach(({ trigger, handle }) => {
+            if (trigger(x * ratio, y * ratio)) handle();
+          });
         });
       } else if (this.moveCb) {
         if (dx > dy) {
@@ -58,7 +61,6 @@ const Handler = {
     };
     window.onresize = () => {
       Canvas.resize();
-      this.clearClickCb();
       this.resizeCbs.forEach((cb) => cb());
     };
   },
@@ -71,8 +73,8 @@ const Handler = {
     this.moveCb = null;
   },
 
-  addClickCb(trigger, handle) {
-    this.clickCbs.push({ trigger, handle });
+  addClickCb(cbs) {
+    this.clickCbs.push(cbs);
   },
 
   clearClickCb() {
@@ -87,11 +89,11 @@ const Handler = {
     this.resizeCb = [];
   },
 
-  async loadImage() {
+  async uploadImage(description) {
     const options = {
       types: [
         {
-          description: "请选择图片",
+          description: `请选择${description}图片`,
           accept: {
             "image/*": [".png", ".gif", ".jpeg", ".jpg", ".webp"],
           },
@@ -104,6 +106,41 @@ const Handler = {
     const img = new Image();
     img.src = URL.createObjectURL(file);
     return img;
+  },
+
+  async uploadJsonAsObj(description) {
+    const options = {
+      types: [
+        {
+          description: `请选择${description} JSON 文件`,
+          accept: {
+            "application/json": [".json"],
+          },
+        },
+      ],
+      excludeAcceptAllOption: true,
+    };
+    const [fileHandle] = await window.showOpenFilePicker(options);
+    const file = await fileHandle.getFile();
+    const text = await file.text();
+    return JSON.parse(text);
+  },
+
+  async downloadObjAsJson(obj, description) {
+    const options = {
+      types: [
+        {
+          description: `保存${description} JSON 文件`,
+          accept: {
+            "application/json": [".json"],
+          },
+        },
+      ],
+    };
+    const fileHandle = await window.showSaveFilePicker(options);
+    const writable = await fileHandle.createWritable();
+    await writable.write(JSON.stringify(obj));
+    await writable.close();
   },
 };
 

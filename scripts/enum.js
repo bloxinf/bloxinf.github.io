@@ -26,7 +26,7 @@ export const Walls = {
   DR: 3,
 };
 
-export const Buttons = {
+export const Triggers = {
   Lying: 0,
   Standing: 1,
   Splitting: 2,
@@ -48,4 +48,10 @@ export const Directions = {
 export const Terminations = {
   Win: 0,
   Lose: 1,
+  Abort: 2,
+};
+
+export const Statuses = {
+  Success: 0,
+  Failure: 1,
 };
