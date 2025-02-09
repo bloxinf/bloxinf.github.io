@@ -1,3 +1,4 @@
+import Canvas from "./canvas.js";
 import Handler from "./handler.js";
 
 const Dialog = {

@@ -1,3 +1,6 @@
+import Canvas from "./canvas";
+import Handler from "./handler";
+
 const Blox = {
   blox: null,
   texture: null,
@@ -16,16 +19,7 @@ const Blox = {
     this.draw();
   },
 
-  draw() {
-    const ctx = Canvas.getCtx(Canvases.Blox);
-    const { cw, ch } = Canvas.getSize();
-    ctx.clearRect(0, 0, cw, ch);
-    if (!this.blox) return;
-    const { texture: bloxTexture } = this;
-    const { size, pos } = this.blox;
-    const { x, y } = pos;
-    ctx.drawImage(bloxTexture, x * size, y * size, size, size);
-  },
+  draw() {},
 
   setTexture(img) {
     this.texture = img;
