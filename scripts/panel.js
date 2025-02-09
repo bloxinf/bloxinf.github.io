@@ -10,7 +10,7 @@ const Panel = {
 
   init() {
     Handler.addResizeCb(() => this.draw());
-    Handler.addClickCb(() => this.clickCbs);
+    Handler.addClickCb(this.clickCbs);
     const ctx = Canvas.getCtx(Canvases.Panel);
     ctx.fillStyle = "black";
     ctx.strokeStyle = "white";
