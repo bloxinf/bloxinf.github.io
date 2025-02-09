@@ -1,4 +1,5 @@
 import Canvas from "./canvas.js";
+import { Canvases } from "./enum.js";
 import Handler from "./handler.js";
 
 const Dialog = {
