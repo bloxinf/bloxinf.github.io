@@ -1,5 +1,5 @@
-import Canvas from "./canvas";
-import Handler from "./handler";
+import Canvas from "./canvas.js";
+import Handler from "./handler.js";
 
 const Blox = {
   blox: null,
