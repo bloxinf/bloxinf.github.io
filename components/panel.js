@@ -40,8 +40,8 @@ const Panel = {
     const gap = 24 * ratio;
     const size = 48 * ratio;
     ctx.clearRect(0, 0, cw, ch);
-    ctx.lineWidth = 8 * ratio;
-    ctx.font = `${size}px`;
+    ctx.lineWidth = 4 * ratio;
+    ctx.font = `${size}px sans-serif`;
     {
       let curX = gap;
       let curY = gap;

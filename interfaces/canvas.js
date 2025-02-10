@@ -27,7 +27,7 @@ const Canvas = {
   },
 
   getSize() {
-    return { width: this.width, height: this.height };
+    return { cw: this.width, ch: this.height };
   },
 
   getRatio() {

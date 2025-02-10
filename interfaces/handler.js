@@ -93,7 +93,7 @@ const Handler = {
     const options = {
       types: [
         {
-          description: `请选择${description}图片`,
+          description: `${description}图片`,
           accept: {
             "image/*": [".png", ".gif", ".jpeg", ".jpg", ".webp"],
           },
@@ -112,7 +112,7 @@ const Handler = {
     const options = {
       types: [
         {
-          description: `请选择${description} JSON 文件`,
+          description: `${description} JSON 文件`,
           accept: {
             "application/json": [".json"],
           },
