@@ -1,5 +1,6 @@
-import Canvas from "./canvas.js";
-import Handler from "./handler.js";
+import Canvas from "../interfaces/canvas.js";
+import { Statuses } from "../interfaces/enum.js";
+import Handler from "../interfaces/handler.js";
 
 const Blox = {
   blox: null,
@@ -11,7 +12,9 @@ const Blox = {
 
   load(blox) {
     this.blox = blox;
+    // todo: check if blox is valid
     this.draw();
+    return Statuses.Success;
   },
 
   unload() {

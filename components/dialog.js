@@ -1,6 +1,6 @@
-import Canvas from "./canvas.js";
-import { Canvases } from "./enum.js";
-import Handler from "./handler.js";
+import Canvas from "../interfaces/canvas.js";
+import { Canvases } from "../interfaces/enum.js";
+import Handler from "../interfaces/handler.js";
 
 const Dialog = {
   dialog: null,

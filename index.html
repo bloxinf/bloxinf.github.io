@@ -1,22 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        overflow: hidden;
-      }
-
-      canvas {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-      }
-    </style>
+    <title>Bloxinf</title>
+    <link rel="icon" href="favicon.svg" />
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width" />
   </head>
 
   <body>
@@ -25,15 +13,6 @@
     <canvas></canvas>
     <canvas></canvas>
     <canvas></canvas>
-    <script type="module">
-      import Canvas from "./scripts/canvas.js";
-      import Game from "./scripts/game.js";
-      import Handler from "./scripts/handler.js";
-
-      Handler.init();
-      Canvas.init();
-      Game.init();
-      Game.run();
-    </script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>

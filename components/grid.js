@@ -1,4 +1,4 @@
-import Handler from "./handler.js";
+import Handler from "../interfaces/handler.js";
 
 const Grid = {
   grid: null,
@@ -10,7 +10,9 @@ const Grid = {
 
   load(grid) {
     this.grid = grid;
+    // todo: check if grid is valid
     this.draw();
+    return Statuses.Success;
   },
 
   unload() {

@@ -1,0 +1,18 @@
+<svg width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @media(prefers-color-scheme: light) {
+      path {
+        fill: black;
+      }
+    }
+
+    @media(prefers-color-scheme: dark) {
+      path {
+        fill: white;
+      }
+    }
+  </style>
+  <path d="m24,2l-14,7l14,7l14,-7z" />
+  <path d="m9,11l0,28l14,7l0,-28z" />
+  <path d="m39,11l0,28l-14,7l0,-28z" />
+</svg>

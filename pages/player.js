@@ -1,12 +1,18 @@
-import Blox from "./blox.js";
-import { Lands, Poses, Directions, Terminations, Statuses } from "./enum.js";
-import Grid from "./grid.js";
-import Handler from "./handler.js";
+import Blox from "../components/blox.js";
+import Grid from "../components/grid.js";
+import {
+  Lands,
+  Poses,
+  Directions,
+  Terminations,
+  Statuses,
+} from "../interfaces/enum.js";
+import Handler from "../interfaces/handler.js";
 
 const Player = {
   terminateCb: null,
 
-  start(stage, terminateCb) {
+  launch(stage, terminateCb) {
     if (
       Grid.load(stage.grid) === Statuses.Failure ||
       Blox.load(stage.blox) === Statuses.Failure
@@ -24,7 +30,7 @@ const Player = {
     Handler.clearMoveCb();
     Grid.unload();
     Blox.unload();
-    this.terminateCb(termination);
+    this.terminateCb(termination); // todo: determine whether to pass termination
   },
 
   move(direction) {
