@@ -11,11 +11,6 @@ const Panel = {
   init() {
     Handler.addResizeCb(() => this.draw());
     Handler.addClickCb(this.clickCbs);
-    const ctx = Canvas.getCtx(Canvases.Panel);
-    ctx.fillStyle = "black";
-    ctx.strokeStyle = "white";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
   },
 
   addButton(menus, tools, modes) {
@@ -40,18 +35,26 @@ const Panel = {
     const gap = 24 * ratio;
     const size = 48 * ratio;
     ctx.clearRect(0, 0, cw, ch);
-    ctx.lineWidth = 4 * ratio;
+    ctx.fillStyle = "black";
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 6 * ratio;
     ctx.font = `${size}px sans-serif`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
     {
       let curX = gap;
       let curY = gap;
       this.menu.forEach((menu) => {
-        ctx.fillRect(curX, curY, size, size);
         ctx.strokeRect(curX, curY, size, size);
+        ctx.fillRect(curX, curY, size, size);
         ctx.drawImage(menu.icon, curX, curY, size, size);
+        const startX = curX;
+        const startY = curY;
+        const endX = curX + size;
+        const endY = curY + size;
         this.clickCbs.push({
           trigger: (x, y) =>
-            x >= curX && x <= curX + size && y >= curY && y <= curY + size,
+            x >= startX && x <= endX && y >= startY && y <= endY,
           handle: menu.callback,
         });
         curX += gap + size;
@@ -69,12 +72,16 @@ const Panel = {
       else curX = (cw - (size + gap) * this.tool.length + gap) / 2;
       let curY = ch - gap - size;
       this.tool.forEach((tool) => {
-        ctx.fillRect(curX, curY, size, size);
         ctx.strokeRect(curX, curY, size, size);
+        ctx.fillRect(curX, curY, size, size);
         ctx.drawImage(tool.icon, curX, curY, size, size);
+        const startX = curX;
+        const startY = curY;
+        const endX = curX + size;
+        const endY = curY + size;
         this.clickCbs.push({
           trigger: (x, y) =>
-            x >= curX && x <= curX + size && y >= curY && y <= curY + size,
+            x >= startX && x <= endX && y >= startY && y <= endY,
           handle: tool.callback,
         });
         curX += gap + size;
@@ -87,15 +94,20 @@ const Panel = {
     {
       const width = size * 4;
       const height = size * 2;
-      const curX = (cw - width) / 2;
+      let curX = (cw - width) / 2;
       let curY = (ch - (height + gap) * this.mode.length - gap) / 2;
       this.mode.forEach((mode) => {
-        ctx.fillRect(curX, curY, width, height);
         ctx.strokeRect(curX, curY, width, height);
+        ctx.fillRect(curX, curY, width, height);
         ctx.strokeText(mode.name, curX + width / 2, curY + height / 2, width);
+        ctx.fillText(mode.name, curX + width / 2, curY + height / 2, width);
+        const startX = curX;
+        const startY = curY;
+        const endX = curX + width;
+        const endY = curY + height;
         this.clickCbs.push({
           trigger: (x, y) =>
-            x >= curX && x <= curX + width && y >= curY && y <= curY + height,
+            x >= startX && x <= endX && y >= startY && y <= endY,
           handle: mode.callback,
         });
         curY += height + gap;

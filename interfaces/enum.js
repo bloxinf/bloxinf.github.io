@@ -50,8 +50,3 @@ export const Terminations = {
   Lose: 1,
   Abort: 2,
 };
-
-export const Statuses = {
-  Success: 0,
-  Failure: 1,
-};

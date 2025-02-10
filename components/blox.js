@@ -1,5 +1,4 @@
 import Canvas from "../interfaces/canvas.js";
-import { Statuses } from "../interfaces/enum.js";
 import Handler from "../interfaces/handler.js";
 
 const Blox = {
@@ -10,11 +9,13 @@ const Blox = {
     Handler.addResizeCb(() => this.draw());
   },
 
+  check(blox) {
+    return true;
+  },
+
   load(blox) {
     this.blox = blox;
-    // todo: check if blox is valid
     this.draw();
-    return Statuses.Success;
   },
 
   unload() {
