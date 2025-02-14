@@ -49,4 +49,5 @@ export const Terminations = {
   Win: 0,
   Lose: 1,
   Abort: 2,
+  Error: 3,
 };

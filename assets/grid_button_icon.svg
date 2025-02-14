@@ -1,0 +1,19 @@
+<svg width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .border {
+      stroke: white;
+      stroke-width: 2;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .content {
+      fill: white;
+    }
+  </style>
+  <path d="m 2,6 l 0,12 l 12,24 32,0 l 0,-12" class="border" />
+  <line x1="14" x2="14" y1="30" y2="42" class="border" />
+  <path d="m 2,6 l 12,24 l 32,0 l -12,-24 z" class="border" />
+  <path d="m 16,28 l 24,0 l -21,-18 z" class="content" />
+  <circle r="4" transform="matrix(1,0,0.3333,0.6667,30,12)" class="content" />
+</svg>

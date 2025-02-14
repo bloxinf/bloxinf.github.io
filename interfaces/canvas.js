@@ -1,3 +1,5 @@
+import Handler from "./handler.js";
+
 const Canvas = {
   canvases: [],
   ctxs: [],
@@ -9,6 +11,7 @@ const Canvas = {
     this.canvases = Array.from(document.getElementsByTagName("canvas"));
     this.canvases.forEach((canvas) => this.ctxs.push(canvas.getContext("2d")));
     this.resize();
+    Handler.addResizeCb(() => this.resize());
   },
 
   resize() {

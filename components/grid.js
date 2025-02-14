@@ -8,11 +8,14 @@ const Grid = {
     Handler.addResizeCb(() => this.draw());
   },
 
+  check(grid) {
+    // todo: check
+    return true;
+  },
+
   load(grid) {
     this.grid = grid;
-    // todo: check if grid is valid
     this.draw();
-    return Statuses.Success;
   },
 
   unload() {
@@ -21,6 +24,16 @@ const Grid = {
   },
 
   draw() {},
+
+  setTexture(img) {
+    this.texture = img;
+    this.draw();
+  },
+
+  clearTexture() {
+    this.texture = null;
+    this.draw();
+  },
 };
 
 export default Grid;

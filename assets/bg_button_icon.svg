@@ -1,0 +1,17 @@
+<svg width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .border {
+      stroke: white;
+      stroke-width: 2;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .content {
+      fill: white;
+    }
+  </style>
+  <rect x="4" y="9" width="40" height="30" class="border" />
+  <path d="m 10,36 l 24,0 l -12,-20 z" class="content" />
+  <circle cx="34" cy="18" r="4" class="content" />
+</svg>

@@ -48,10 +48,10 @@ const Panel = {
         ctx.strokeRect(curX, curY, size, size);
         ctx.fillRect(curX, curY, size, size);
         ctx.drawImage(menu.icon, curX, curY, size, size);
-        const startX = curX;
-        const startY = curY;
-        const endX = curX + size;
-        const endY = curY + size;
+        const startX = curX / ratio;
+        const startY = curY / ratio;
+        const endX = (curX + size) / ratio;
+        const endY = (curY + size) / ratio;
         this.clickCbs.push({
           trigger: (x, y) =>
             x >= startX && x <= endX && y >= startY && y <= endY,
@@ -75,10 +75,10 @@ const Panel = {
         ctx.strokeRect(curX, curY, size, size);
         ctx.fillRect(curX, curY, size, size);
         ctx.drawImage(tool.icon, curX, curY, size, size);
-        const startX = curX;
-        const startY = curY;
-        const endX = curX + size;
-        const endY = curY + size;
+        const startX = curX / ratio;
+        const startY = curY / ratio;
+        const endX = (curX + size) / ratio;
+        const endY = (curY + size) / ratio;
         this.clickCbs.push({
           trigger: (x, y) =>
             x >= startX && x <= endX && y >= startY && y <= endY,
@@ -99,12 +99,14 @@ const Panel = {
       this.mode.forEach((mode) => {
         ctx.strokeRect(curX, curY, width, height);
         ctx.fillRect(curX, curY, width, height);
-        ctx.strokeText(mode.name, curX + width / 2, curY + height / 2, width);
-        ctx.fillText(mode.name, curX + width / 2, curY + height / 2, width);
-        const startX = curX;
-        const startY = curY;
-        const endX = curX + width;
-        const endY = curY + height;
+        const centerX = curX + width / 2;
+        const centerY = curY + height / 2;
+        ctx.strokeText(mode.name, centerX, centerY, width);
+        ctx.fillText(mode.name, centerX, centerY, width);
+        const startX = curX / ratio;
+        const startY = curY / ratio;
+        const endX = (curX + width) / ratio;
+        const endY = (curY + height) / ratio;
         this.clickCbs.push({
           trigger: (x, y) =>
             x >= startX && x <= endX && y >= startY && y <= endY,

@@ -15,15 +15,14 @@ const Background = {
     const { cw, ch } = Canvas.getSize();
     ctx.clearRect(0, 0, cw, ch);
     if (this.content) {
-      const img = this.content;
-      const iw = img.width;
-      const ih = img.height;
+      const iw = this.content.width;
+      const ih = this.content.height;
       const scale = Math.max(cw / iw, ch / ih);
       const dw = iw * scale;
       const dh = ih * scale;
       const dx = (cw - dw) / 2;
       const dy = (ch - dh) / 2;
-      ctx.drawImage(img, dx, dy, dw, dh);
+      ctx.drawImage(this.content, dx, dy, dw, dh);
     } else {
       ctx.fillStyle = "black";
       ctx.fillRect(0, 0, cw, ch);

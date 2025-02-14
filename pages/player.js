@@ -1,36 +1,72 @@
+import Assets from "../assets/assets.js";
 import Blox from "../components/blox.js";
+import Dialog from "../components/dialog.js";
 import Grid from "../components/grid.js";
-import {
-  Lands,
-  Poses,
-  Directions,
-  Terminations,
-  Statuses,
-} from "../interfaces/enum.js";
+import Panel from "../components/panel.js";
+import { Lands, Poses, Directions, Terminations } from "../interfaces/enum.js";
 import Handler from "../interfaces/handler.js";
 
 const Player = {
   terminateCb: null,
 
   launch(stage, terminateCb) {
-    if (
-      Grid.load(stage.grid) === Statuses.Failure ||
-      Blox.load(stage.blox) === Statuses.Failure
-    ) {
-      Grid.unload();
-      Blox.unload();
-      return Statuses.Failure;
-    }
-    this.terminateCb = terminateCb;
     Handler.setMoveCb((direction) => this.move(direction));
-    return Statuses.Success;
+    this.terminateCb = terminateCb;
+    if (
+      !(
+        stage.grid &&
+        stage.blox &&
+        Grid.check(stage.grid) &&
+        Blox.check(stage.blox)
+      )
+    ) {
+      this.terminate(Terminations.Error);
+      return;
+    }
+    Grid.load(stage.grid);
+    Blox.load(stage.blox);
+    Panel.addButton(
+      [
+        {
+          icon: Assets.homeButtonIcon(),
+          callback: () =>
+            Dialog.confirm("Abort", "Do you want to abort the game?", () =>
+              this.terminate(Terminations.Abort)
+            ),
+        },
+      ],
+      [],
+      []
+    );
   },
 
   terminate(termination) {
     Handler.clearMoveCb();
+    Panel.clearButton();
+    let title, content;
+    switch (termination) {
+      case Terminations.Win:
+        title = "Win";
+        content = "Congratulations!";
+        break;
+      case Terminations.Lose:
+        title = "Lose";
+        content = "Game Over!";
+        break;
+      case Terminations.Abort:
+        title = "Abort";
+        content = "Game Aborted!";
+        break;
+      case Terminations.Error:
+        title = "Error";
+        content = "Game Error!";
+        break;
+    }
+    Dialog.info(title, content);
     Grid.unload();
     Blox.unload();
-    this.terminateCb(termination); // todo: determine whether to pass termination
+    this.terminateCb();
+    this.terminateCb = null;
   },
 
   move(direction) {

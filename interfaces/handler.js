@@ -1,4 +1,3 @@
-import Canvas from "./canvas.js";
 import { Directions } from "./enum.js";
 
 const Handler = {
@@ -38,17 +37,15 @@ const Handler = {
       prevY = e.y;
     };
     document.onpointerup = (e) => {
-      const x = e.x;
-      const y = e.y;
-      const dx = x - prevX;
-      const dy = y - prevY;
+      const dx = e.x - prevX;
+      const dy = e.y - prevY;
       if (Math.abs(dx) < 10 && Math.abs(dy) < 10) {
-        const ratio = Canvas.getRatio();
-        this.clickCbs.forEach((cbs) => {
-          cbs.forEach(({ trigger, handle }) => {
-            if (trigger(x * ratio, y * ratio)) handle();
-          });
-        });
+        for (const cbs of this.clickCbs)
+          for (const cb of cbs)
+            if (cb.trigger(e.x, e.y)) {
+              cb.handle();
+              return;
+            }
       } else if (this.moveCb) {
         if (dx > dy) {
           if (dx > -dy) this.moveCb(Directions.Right);
@@ -60,7 +57,6 @@ const Handler = {
       }
     };
     window.onresize = () => {
-      Canvas.resize();
       this.resizeCbs.forEach((cb) => cb());
     };
   },
@@ -89,58 +85,81 @@ const Handler = {
     this.resizeCbs = [];
   },
 
-  async uploadImage(description) {
-    const options = {
-      types: [
-        {
-          description: `${description}图片`,
-          accept: {
-            "image/*": [".png", ".gif", ".jpeg", ".jpg", ".webp"],
+  uploadImage(description) {
+    return new Promise((resolve, reject) => {
+      const options = {
+        startIn: "pictures",
+        types: [
+          {
+            description: `${description} Image`,
+            accept: {
+              "image/*": [".png", ".gif", ".jpeg", ".jpg", ".webp"],
+            },
           },
-        },
-      ],
-      excludeAcceptAllOption: true,
-    };
-    const [fileHandle] = await window.showOpenFilePicker(options);
-    const file = await fileHandle.getFile();
-    const img = new Image();
-    img.src = URL.createObjectURL(file);
-    return img;
+        ],
+        excludeAcceptAllOption: true,
+      };
+      window
+        .showOpenFilePicker(options)
+        .then(([fileHandle]) => fileHandle.getFile())
+        .then((file) => {
+          const img = new Image();
+          img.onload = () => resolve(img);
+          img.src = URL.createObjectURL(file);
+        })
+        .catch(reject);
+    });
   },
 
-  async uploadJsonAsObj(description) {
-    const options = {
-      types: [
-        {
-          description: `${description} JSON 文件`,
-          accept: {
-            "application/json": [".json"],
+  uploadJsonAsObj(description) {
+    return new Promise((resolve, reject) => {
+      const options = {
+        id: "bloxinf",
+        types: [
+          {
+            description: `${description} JSON`,
+            accept: {
+              "application/json": [".json"],
+            },
           },
-        },
-      ],
-      excludeAcceptAllOption: true,
-    };
-    const [fileHandle] = await window.showOpenFilePicker(options);
-    const file = await fileHandle.getFile();
-    const text = await file.text();
-    return JSON.parse(text);
+        ],
+        excludeAcceptAllOption: true,
+      };
+      window
+        .showOpenFilePicker(options)
+        .then(([fileHandle]) => fileHandle.getFile())
+        .then((file) => file.text())
+        .then((text) => resolve(JSON.parse(text)))
+        .catch(reject);
+    });
   },
 
-  async downloadObjAsJson(obj, description) {
-    const options = {
-      types: [
-        {
-          description: `保存${description} JSON 文件`,
-          accept: {
-            "application/json": [".json"],
+  downloadObjAsJson(obj, description) {
+    return new Promise((resolve, reject) => {
+      const options = {
+        id: "bloxinf",
+        suggestedName: "stage.json",
+        types: [
+          {
+            description: `${description} JSON `,
+            accept: {
+              "application/json": [".json"],
+            },
           },
-        },
-      ],
-    };
-    const fileHandle = await window.showSaveFilePicker(options);
-    const writable = await fileHandle.createWritable();
-    await writable.write(JSON.stringify(obj));
-    await writable.close();
+        ],
+      };
+      let writable;
+      window
+        .showSaveFilePicker(options)
+        .then((fileHandle) => fileHandle.createWritable())
+        .then((writableStream) => {
+          writable = writableStream;
+          return writable.write(JSON.stringify(obj));
+        })
+        .then(() => writable.close())
+        .then(resolve)
+        .catch(reject);
+    });
   },
 };
 

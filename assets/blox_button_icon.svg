@@ -1,0 +1,20 @@
+<svg width="48" height="48" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <style>
+    .border {
+      stroke: white;
+      stroke-width: 2;
+      stroke-linejoin: round;
+      fill: none;
+    }
+  </style>
+  <defs>
+    <g id="content" fill="white">
+      <path d="m 2,18 l 14,0 l -7,-14 z" />
+      <circle cx="16" cy="6" r="2" />
+    </g>
+  </defs>
+  <rect x="14" y="4" width="20" height="40" class="border" />
+  <line x1="14" x2="34" y1="24" y2="24" class="border" />
+  <use xlink:href="#content" x="14" y="4" />
+  <use xlink:href="#content" x="14" y="24" />
+</svg>
