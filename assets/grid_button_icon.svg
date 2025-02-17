@@ -11,9 +11,9 @@
       fill: white;
     }
   </style>
-  <path d="m 2,6 l 0,12 l 12,24 32,0 l 0,-12" class="border" />
-  <line x1="14" x2="14" y1="30" y2="42" class="border" />
-  <path d="m 2,6 l 12,24 l 32,0 l -12,-24 z" class="border" />
-  <path d="m 16,28 l 24,0 l -21,-18 z" class="content" />
-  <circle r="4" transform="matrix(1,0,0.3333,0.6667,30,12)" class="content" />
+  <path d="m 2,30 l 0,12 l 32,0 l 12,-24 l 0,-12" class="border" />
+  <line x1="34" x2="34" y1="30" y2="42" class="border" />
+  <path d="m 14,6 l -12,24 l 32,0 l 12,-24 z" class="border" />
+  <path d="m 6,28 l 24,0 l -4.5,-15 z" class="content" />
+  <circle r="4" transform="matrix(1,0,-0.375,0.75,34,14)" class="content" />
 </svg>
