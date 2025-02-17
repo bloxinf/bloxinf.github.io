@@ -57,13 +57,7 @@ const Home = {
                 this.hide();
                 Player.launch(stage, () => this.show());
               })
-              .catch(() =>
-                Dialog.popup({
-                  title: "Error",
-                  content: "Failed to load game data!",
-                  buttons: [{ text: "OK", callback: () => {} }],
-                })
-              ),
+              .catch(() => Dialog.info("Error", "Failed to load game data!")),
         },
       ]
     );

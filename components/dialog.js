@@ -53,34 +53,33 @@ const Dialog = {
   },
 
   draw() {
-    const ctx = Canvas.getCtx(Canvases.Dialog);
-    const { cw, ch } = Canvas.getSize();
-    const ratio = Canvas.getRatio();
+    const ctx = Canvas.getContext(Canvases.Dialog);
+    const cw = window.innerWidth;
+    const ch = window.innerHeight;
     ctx.clearRect(0, 0, cw, ch);
     if (!this.dialog) return;
-    // dialog: {title, content, buttons: {text, callback}}
     {
       ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
       ctx.fillRect(0, 0, cw, ch);
     }
     const { title, content, buttons } = this.dialog;
-    const width = 480 * ratio;
-    const height = 320 * ratio;
+    const width = 480;
+    const height = 320;
     const x = (cw - width) / 2;
     const y = (ch - height) / 2;
     ctx.strokeStyle = "white";
-    ctx.lineWidth = 6 * ratio;
+    ctx.lineWidth = 6;
     {
       ctx.strokeRect(x, y, width, height);
       ctx.fillStyle = "black";
       ctx.fillRect(x, y, width, height);
     }
-    const padding = 24 * ratio;
-    const gap = 24 * ratio;
+    const padding = 24;
+    const gap = 24;
     const textWidth = width - padding * 2;
-    const titleSize = 36 * ratio;
-    const contentSize = 24 * ratio;
-    const buttonTextSize = 18 * ratio;
+    const titleSize = 36;
+    const contentSize = 24;
+    const buttonTextSize = 18;
     {
       const titleX = cw / 2;
       const titleY = y + padding + titleSize / 2;
@@ -100,8 +99,8 @@ const Dialog = {
       ctx.fillText(content, contentX, contentY, textWidth);
     }
     {
-      const buttonWidth = 96 * ratio;
-      const buttonHeight = 48 * ratio;
+      const buttonWidth = 96;
+      const buttonHeight = 48;
       let curX = (cw - (buttonWidth + gap) * buttons.length + gap) / 2;
       let curY = y + height - padding - buttonHeight;
       ctx.textAlign = "center";
@@ -115,10 +114,10 @@ const Dialog = {
         const centerX = curX + buttonWidth / 2;
         const centerY = curY + buttonHeight / 2;
         ctx.fillText(button.text, centerX, centerY, buttonWidth);
-        const startX = curX / ratio;
-        const startY = curY / ratio;
-        const endX = (curX + buttonWidth) / ratio;
-        const endY = (curY + buttonHeight) / ratio;
+        const startX = curX;
+        const startY = curY;
+        const endX = curX + buttonWidth;
+        const endY = curY + buttonHeight;
         this.clickCbs.push({
           trigger: (x, y) =>
             x >= startX && x <= endX && y >= startY && y <= endY,
@@ -131,10 +130,10 @@ const Dialog = {
       });
     }
     {
-      const startX = x / ratio;
-      const startY = y / ratio;
-      const endX = (x + width) / ratio;
-      const endY = (y + height) / ratio;
+      const startX = x;
+      const startY = y;
+      const endX = x + width;
+      const endY = y + height;
       this.clickCbs.push({
         trigger: (x, y) => x >= startX && x <= endX && y >= startY && y <= endY,
         handle: () => {},

@@ -1,4 +1,5 @@
 import Assets from "../assets/assets.js";
+import Background from "../components/background.js";
 import Blox from "../components/blox.js";
 import Dialog from "../components/dialog.js";
 import Grid from "../components/grid.js";
@@ -33,6 +34,33 @@ const Player = {
             Dialog.confirm("Abort", "Do you want to abort the game?", () =>
               this.terminate(Terminations.Abort)
             ),
+        },
+        {
+          icon: Assets.bgButtonIcon(),
+          callback: () =>
+            Handler.uploadImage("Background")
+              .then((img) => Background.set(img))
+              .catch(() =>
+                Dialog.info("Error", "Failed to load background image!")
+              ),
+        },
+        {
+          icon: Assets.gridButtonIcon(),
+          callback: () =>
+            Handler.uploadImage("Grid Texture")
+              .then((img) => Grid.setTexture(img))
+              .catch(() =>
+                Dialog.info("Error", "Failed to load grid texture image!")
+              ),
+        },
+        {
+          icon: Assets.bloxButtonIcon(),
+          callback: () =>
+            Handler.uploadImage("Blox Texture")
+              .then((img) => Blox.setTexture(img))
+              .catch(() =>
+                Dialog.info("Error", "Failed to load blox texture image!")
+              ),
         },
       ],
       [],

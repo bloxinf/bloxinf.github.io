@@ -11,8 +11,9 @@ const Background = {
   },
 
   draw() {
-    const ctx = Canvas.getCtx(Canvases.Background);
-    const { cw, ch } = Canvas.getSize();
+    const ctx = Canvas.getContext(Canvases.Background);
+    const cw = window.innerWidth;
+    const ch = window.innerHeight;
     ctx.clearRect(0, 0, cw, ch);
     if (this.content) {
       const iw = this.content.width;

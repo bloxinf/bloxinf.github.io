@@ -2,39 +2,26 @@ import Handler from "./handler.js";
 
 const Canvas = {
   canvases: [],
-  ctxs: [],
-  width: 0,
-  height: 0,
-  ratio: 1,
 
   init() {
     this.canvases = Array.from(document.getElementsByTagName("canvas"));
-    this.canvases.forEach((canvas) => this.ctxs.push(canvas.getContext("2d")));
     this.resize();
     Handler.addResizeCb(() => this.resize());
   },
 
   resize() {
     const ratio = window.devicePixelRatio;
-    this.width = window.innerWidth * ratio;
-    this.height = window.innerHeight * ratio;
-    this.ratio = ratio;
+    const width = window.innerWidth * ratio;
+    const height = window.innerHeight * ratio;
     this.canvases.forEach((canvas) => {
-      canvas.width = this.width;
-      canvas.height = this.height;
+      canvas.width = width;
+      canvas.height = height;
+      canvas.getContext("2d").scale(ratio, ratio);
     });
   },
 
-  getCtx(i) {
-    return this.ctxs[i];
-  },
-
-  getSize() {
-    return { cw: this.width, ch: this.height };
-  },
-
-  getRatio() {
-    return this.ratio;
+  getContext(i) {
+    return this.canvases[i].getContext("2d");
   },
 };
 
